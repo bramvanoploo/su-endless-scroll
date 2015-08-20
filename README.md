@@ -41,7 +41,7 @@ That's why I've created my own version. No code from his project has been used, 
  ```
  yourApp.controller('YourController', ['$scope', 
    function($scope) {
-     $scope.items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+     $scope.items = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
      $scope.scrollItems = [];
      $scope.displayLimit = 3;
  
