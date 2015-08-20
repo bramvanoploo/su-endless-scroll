@@ -1,0 +1,30 @@
+{
+  "name": "suEndlessScroll","version": "0.1.0",
+  "authors": [
+    "Bram van Oploo <bram@sudo-systems.com>"
+  ],
+  "description": "Endless scrolling for AngularJS",
+  "main": "su-endless-scroll.js",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "scroll",
+    "auto",
+    "load",
+    "trigger",
+    "directive",
+    "module",
+    "endless"
+  ],
+  "license": "MIT",
+  "homepage": "http://github.com/Bram77/su-endless-scroll",
+  "ignore": [
+    "**/.*",
+    "_*",
+    "nbproject",
+    ".*"
+  ],
+  "dependencies": {
+    "angular": ">=1.2.0"
+  }
+}
