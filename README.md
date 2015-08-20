@@ -32,7 +32,7 @@ That's why I've created my own version. No code from his project has been used, 
      <div ng-repeat="item in items">
        {{$index}}
      </div>
-   </div>
+    </div>
  </section>
  ```
  The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height` or `max-height` specified.
