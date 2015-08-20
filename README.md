@@ -1,4 +1,4 @@
-# suEndlessScroll
+# angular-su-endless-scroll
 Endless scrolling for AngularJs
 
 # About
@@ -8,7 +8,7 @@ That's why I've created my own version. No code from his project has been used, 
 # Installation
 - Just download the project via [Download ZIP](https://github.com/Bram77/su-endless-scroll/archive/master.zip) button or use Bower:
  ```
- bower install suEndlessScroll
+ bower install angular-su-endless-scroll --save
  ```
 
 - Now add the script tag to your page. My module's only dependency is AngularJs itself (where ngInfiniteScroll also required jQuery):
