@@ -51,7 +51,7 @@ That's why I've created my own version. No code from his project has been used, 
        }
      
        for(var x = 0; x < $scope.displayLimit; x++) {
-         var nextIndex = ((scrollItemsCount)+x);
+         var nextIndex = (scrollItemsCount+x);
 
          if($scope.items[nextIndex]) {
            $scope.scrollItems.push($scope.items[nextIndex]);
