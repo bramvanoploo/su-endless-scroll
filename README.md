@@ -30,7 +30,7 @@ That's why I've created my own version. No code from his project has been used, 
  <section ng-controller="yourController">
    <div class="wrapper" su-endless-scroll="callback()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
      <div ng-repeat="item in items">
-       {{$index}}
+       {{$index}}: {{item}}
      </div>
     </div>
  </section>
