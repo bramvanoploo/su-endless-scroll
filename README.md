@@ -56,6 +56,9 @@ That's why I've created my own version. No code from his project has been used, 
          if($scope.items[nextIndex]) {
            $scope.scrollItems.push($scope.items[nextIndex]);
          }
+         else {
+          break;
+         }
        }
 
        if(!$scope.$$phase){
