@@ -37,8 +37,8 @@ That's why I've created my own version. No code from his project has been used, 
     </div>
  </section>
  ```
- The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height` or `max-height` needs to be specified. 
-Alternatively you can `position` the element `absolute` or `fixed`. Then a height specification is not required.
+ The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height:` or `max-height:` needs to be specified. 
+Alternatively you can `position:` the element `absolute` or `fixed`. Then a height specification is not required.
  
 - Create the su-endless-scroll `callback` method in your controller (let's call it `loadMore`):
  ```
