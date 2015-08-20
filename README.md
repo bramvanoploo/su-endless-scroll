@@ -28,11 +28,11 @@ That's why I've created my own version. No code from his project has been used, 
 - Add the directive to your HTML element:
  ```
  <section ng-controller="yourController">
-  <div class="wrapper" su-endless-scroll="callback()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
-   <div ng-repeat="item in items">
-    {{$index}}
+   <div class="wrapper" su-endless-scroll="callback()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
+    <div ng-repeat="item in items">
+     {{$index}}
+    </div>
    </div>
-  </div>
  </section>
  ```
  The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height` or `max-height` specified.
@@ -40,29 +40,29 @@ That's why I've created my own version. No code from his project has been used, 
 - Create the `callabck()` method in your controller (let's call it `loadMore()`):
  ```
  yourApp.controller('YourController', ['$scope', 
-  function($scope) {
-   $scope.items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-   $scope.scrollItems = [];
-   $scope.displayLimit = 3;
+   function($scope) {
+    $scope.items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+    $scope.scrollItems = [];
+    $scope.displayLimit = 3;
  
-   $scope.loadMore = function() {
-     if(!$scope.items[$scope.scrollItems.length]) {
-       return;
-     }
+    $scope.loadMore = function() {
+      if(!$scope.items[$scope.scrollItems.length]) {
+        return;
+      }
      
-     for(var x = 0; x < $scope.displayLimit; x++) {
-       var nextIndex = ((scrollItemsCount)+x);
+      for(var x = 0; x < $scope.displayLimit; x++) {
+        var nextIndex = ((scrollItemsCount)+x);
 
-       if($scope.items[nextIndex]) {
-         $scope.scrollItems.push($scope.items[nextIndex]);
-       }
-     }
+        if($scope.items[nextIndex]) {
+          $scope.scrollItems.push($scope.items[nextIndex]);
+        }
+      }
 
-     if(!$scope.$$phase){
-       $scope.$apply();
-     }
-   };
- }
+      if(!$scope.$$phase){
+        $scope.$apply();
+      }
+    };
+  }
 ]);
  ```
 
