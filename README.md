@@ -29,7 +29,7 @@ That's why I've created my own version. No code from his project has been used, 
  ```
  <section ng-controller="YourController">
    <div class="wrapper" su-endless-scroll="loadMore()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
-     <div ng-repeat="item in items">
+     <div ng-repeat="item in scrollItems">
        {{$index}}: {{item}}
      </div>
     </div>
@@ -62,6 +62,12 @@ That's why I've created my own version. No code from his project has been used, 
          $scope.$apply();
        }
      };
+
+     function init() {
+       $scope.loadMore(); //populate for initial display
+     }
+
+     init();
     }
 ]);
  ```
