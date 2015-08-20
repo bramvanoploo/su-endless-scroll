@@ -62,7 +62,7 @@ That's why I've created my own version. No code from his project has been used, 
          $scope.$apply();
        }
      };
-   }
+    }
 ]);
  ```
 
