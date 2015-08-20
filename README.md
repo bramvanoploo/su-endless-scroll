@@ -25,9 +25,9 @@ That's why I've created my own version. No code from his project has been used, 
  ]);
  ```
 
-- Add the directive to your HTML element (ng-init="loadMore()" populates the scrollItems array for the first time):
+- Add the directive to your HTML element *(`ng-init="init()"` populates the scrollItems array for the first time)*:
  ```
- <section ng-controller="YourController" ng-init="loadMore()">
+ <section ng-controller="YourController" ng-init="init()">
    <div class="wrapper" su-endless-scroll="loadMore()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
      <div ng-repeat="item in scrollItems">
        {{$index}}: {{item}}
@@ -61,6 +61,10 @@ That's why I've created my own version. No code from his project has been used, 
        if(!$scope.$$phase){
          $scope.$apply();
        }
+     };
+
+     $scope.init = function() {
+       $scope.loadMore();
      };
     }
 ]);
