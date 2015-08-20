@@ -27,7 +27,7 @@ That's why I've created my own version. No code from his project has been used, 
 
 - Add the directive to your HTML element:
  ```
- <section ng-controller="YourController">
+ <section ng-controller="YourController" ng-init="loadMore()">
    <div class="wrapper" su-endless-scroll="loadMore()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
      <div ng-repeat="item in scrollItems">
        {{$index}}: {{item}}
@@ -62,12 +62,6 @@ That's why I've created my own version. No code from his project has been used, 
          $scope.$apply();
        }
      };
-
-     function init() {
-       $scope.loadMore(); //populate for initial display
-     }
-
-     init();
     }
 ]);
  ```
