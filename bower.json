@@ -4,7 +4,7 @@
     "Bram van Oploo <bram@sudo-systems.com>"
   ],
   "description": "Endless scrolling for AngularJS",
-  "main": "su-endless-scroll.js",
+  "main": "su-endless-scroll.min.js",
   "keywords": [
     "angular",
     "angularjs",
