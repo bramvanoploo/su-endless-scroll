@@ -29,9 +29,9 @@ That's why I've created my own version. No code from his project has been used, 
  ```
  <section ng-controller="yourController">
    <div class="wrapper" su-endless-scroll="callback()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
-    <div ng-repeat="item in items">
-     {{$index}}
-    </div>
+     <div ng-repeat="item in items">
+       {{$index}}
+     </div>
    </div>
  </section>
  ```
@@ -41,28 +41,28 @@ That's why I've created my own version. No code from his project has been used, 
  ```
  yourApp.controller('YourController', ['$scope', 
    function($scope) {
-    $scope.items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-    $scope.scrollItems = [];
-    $scope.displayLimit = 3;
+     $scope.items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+     $scope.scrollItems = [];
+     $scope.displayLimit = 3;
  
-    $scope.loadMore = function() {
-      if(!$scope.items[$scope.scrollItems.length]) {
-        return;
-      }
+     $scope.loadMore = function() {
+       if(!$scope.items[$scope.scrollItems.length]) {
+         return;
+       }
      
-      for(var x = 0; x < $scope.displayLimit; x++) {
-        var nextIndex = ((scrollItemsCount)+x);
+       for(var x = 0; x < $scope.displayLimit; x++) {
+         var nextIndex = ((scrollItemsCount)+x);
 
-        if($scope.items[nextIndex]) {
-          $scope.scrollItems.push($scope.items[nextIndex]);
-        }
-      }
+         if($scope.items[nextIndex]) {
+           $scope.scrollItems.push($scope.items[nextIndex]);
+         }
+       }
 
-      if(!$scope.$$phase){
-        $scope.$apply();
-      }
-    };
-  }
+       if(!$scope.$$phase){
+         $scope.$apply();
+       }
+     };
+   }
 ]);
  ```
 
