@@ -1,6 +1,7 @@
 # suEndlessScroll
 Endless scrolling for AngularJs
 
+# About
 This module has been inspired by [sroze](https://github.com/sroze) his [ngInfiniteScroll module](http://sroze.github.com/ngInfiniteScroll/). It wasn't working in my project and I found his code a bit over complicated for the task. Less code == less issues. 
 That's why I've created my own version. No code from his project has been used, whatsoever.
 
@@ -19,7 +20,7 @@ That's why I've created my own version. No code from his project has been used, 
 # Usage
 - Inject suEndlessScroll dependency into your AngularJs application:
  ```
- angular.module('yourApp', [
+ var yourApp = angular.module('yourApp', [
    'suEndlessScroll'
  ]);
  ```
@@ -36,9 +37,33 @@ That's why I've created my own version. No code from his project has been used, 
  ```
  The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height` or `max-height` specified.
  
- - Create the `callabck()` method in your controller (let's call it `loadMore()`):
+- Create the `callabck()` method in your controller (let's call it `loadMore()`):
  ```
+ yourApp.controller('YourController', ['$scope', 
+  function($scope) {
+   $scope.items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+   $scope.scrollItems = [];
+   $scope.displayLimit = 3;
  
+   $scope.loadMore = function() {
+     if(!$scope.items[$scope.scrollItems.length]) {
+       return;
+     }
+     
+     for(var x = 0; x < $scope.displayLimit; x++) {
+       var nextIndex = ((scrollItemsCount)+x);
+
+       if($scope.items[nextIndex]) {
+         $scope.scrollItems.push($scope.items[nextIndex]);
+       }
+     }
+
+     if(!$scope.$$phase){
+       $scope.$apply();
+     }
+   };
+ }
+]);
  ```
 
 # Options
