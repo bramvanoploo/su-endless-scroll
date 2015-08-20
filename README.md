@@ -28,7 +28,7 @@ That's why I've created my own version. No code from his project has been used, 
 - Add the directive to your HTML element:
  ```
  <section ng-controller="yourController">
-   <div class="wrapper" su-endless-scroll="callback()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
+   <div class="wrapper" su-endless-scroll="loadMore()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
      <div ng-repeat="item in items">
        {{$index}}: {{item}}
      </div>
