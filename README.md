@@ -11,7 +11,7 @@ That's why I've created my own version. No code from his project has been used, 
  bower install angular-su-endless-scroll --save
  ```
 
-- Now add the script tag to your page. My module's only dependency is AngularJs itself (where ngInfiniteScroll also required jQuery):
+- Now add the script tag to your page. My module's only dependency is AngularJs itself (where ngInfiniteScroll also requires jQuery):
  ```
  <script type='text/javascript' src='path/to/angular.min.js'></script>
  <script type='text/javascript' src='path/to/su-endless-scroll.min.js'></script>
