@@ -25,7 +25,7 @@ That's why I've created my own version. No code from his project has been used, 
  ]);
  ```
 
-- Add the directive to your HTML element:
+- Add the directive to your HTML element (ng-init="loadMore()" populates the scrollItems array for the first time):
  ```
  <section ng-controller="YourController" ng-init="loadMore()">
    <div class="wrapper" su-endless-scroll="loadMore()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
@@ -37,7 +37,7 @@ That's why I've created my own version. No code from his project has been used, 
  ```
  The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height` or `max-height` specified.
  
-- Create the `callabck()` method in your controller (let's call it `loadMore()`):
+- Create the su-endless-scroll `callback` method in your controller (let's call it `loadMore`):
  ```
  yourApp.controller('YourController', ['$scope', 
    function($scope) {
