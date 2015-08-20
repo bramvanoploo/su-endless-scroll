@@ -1,12 +1,12 @@
 {
-  "name": "suEndlessScroll",
+  "name": "angular-su-endless-scroll",
   "version": "1.0.0",
   "description": "Endless scrolling for AngularJS",
   "repository": {
     "type": "git",
     "url": "git://github.com/Bram77/su-endless-scroll.git"
   },
-  "browser": "su-endless-scroll.min.js",
+  "browser": "su-endless-scroll.js",
   "author": {
     "name": "Bram van Oploo",
     "email": "bram@sudo-systems.com",
