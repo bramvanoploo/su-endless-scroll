@@ -13,5 +13,28 @@
     "url": "http://sudo-systems.com"
   },
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "eslint": "^1.2.1",
+    "version-bump": "^0.1.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": false
+    },
+    "rules": {
+      "curly": [
+        2,
+        "multi-line"
+      ],
+      "quotes": [
+        2,
+        "single"
+      ]
+    },
+    "ecmaFeatures": {
+      "modules": false
+    }
+  }
 }
