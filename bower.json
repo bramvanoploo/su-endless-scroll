@@ -1,11 +1,12 @@
 {
   "name": "angular-su-endless-scroll",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
-  { 
-    "name": "Bram van Oploo", 
-    "email": "bram@sudo-systems.com", 
-    "homepage": "http://sudo-systems.com" }
+    {
+      "name": "Bram van Oploo",
+      "email": "bram@sudo-systems.com",
+      "homepage": "http://sudo-systems.com"
+    }
   ],
   "description": "Endless scrolling for AngularJs",
   "main": "su-endless-scroll.min.js",
