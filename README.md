@@ -58,6 +58,11 @@ That's why I've created my own version. No code from his project has been used, 
   height: 350px;
   overlow-y: auto;
 }
+
+.wrapper > div {
+  line-heigth: 24px;
+  border-bottom: 1px solid #AAA;
+}
 ```
 
  
