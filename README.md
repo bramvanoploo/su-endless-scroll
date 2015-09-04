@@ -1,3 +1,12 @@
+# Changelog
+- 1.0.0
+  * Initial release
+
+- 1.1.0
+  * Big improvement in usability. Not real functionality required in the controller anymore. Just two models. One filled and one empty.
+
+
+
 # angular-su-endless-scroll
 Endless scrolling for AngularJs
 
@@ -13,7 +22,7 @@ That's why I've created my own version. No code from his project has been used, 
  bower install angular-su-endless-scroll --save
  ```
 
-- Now add the script tag to your page. My module's only dependency is AngularJs itself (where ngInfiniteScroll also requires jQuery):
+- Now add the script tag to your page. My module's only dependency is AngularJS itself (where ngInfiniteScroll also requires jQuery):
  ```
  <script type='text/javascript' src='path/to/angular.min.js'></script>
  <script type='text/javascript' src='path/to/su-endless-scroll.min.js'></script>
@@ -27,64 +36,56 @@ That's why I've created my own version. No code from his project has been used, 
  ]);
  ```
 
-- Add the directive to your HTML element *(`ng-init="init()"` populates the scrollItems array for the first time)*:
+- Add the directive to your HTML element:
  ```
- <section ng-controller="YourController" ng-init="init()">
-   <div class="wrapper" su-endless-scroll="loadMore()" su-endless-scroll-offset="30" su-endless-scroll-auto-check="true">
-     <div ng-repeat="item in scrollItems">
+ <section ng-controller="YourController">
+   <div class="wrapper" 
+      su-endless-scroll="dataModel"
+      su-endless-scroll-output="scrollModel"
+      su-endless-scroll-items="20"
+      su-endless-scroll-offset="30" 
+      su-endless-scroll-auto-check="true">
+     <div ng-repeat="item in scrollModel track by $index">
        {{$index}}: {{item}}
      </div>
     </div>
  </section>
  ```
  The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height:` or `max-height:` needs to be specified. 
-Alternatively you can `position:` the element `absolute` or `fixed`. Then a height specification is not required.
+Alternatively you can `position:` the element `absolute` or `fixed`, width `top` and `bottom` specified. Then a height or max-height specification is not required.
  
-- Create the su-endless-scroll `callback` method in your controller (let's call it `loadMore`):
+- Create the two models in your controller. One containing the data and one to be used in you ng-repeat. The latter will automatically filled with the appropriate amount of entries by su-endless-scroll:
  ```
  yourApp.controller('YourController', ['$scope', 
-   function($scope) {
-     $scope.items = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-     $scope.scrollItems = [];
-     $scope.displayLimit = 3;
- 
-     $scope.loadMore = function() {
-       var scrollItemsCount = $scope.scrollItems.length;
+    function($scope) {
+      $scope.scrollModel = [];
+      $scope.dataModel = [];
 
-       if(!$scope.items[scrollItemsCount]) {
-         return;
-       }
-     
-       for(var x = 0; x < $scope.displayLimit; x++) {
-         var nextIndex = (scrollItemsCount+x);
-
-         if($scope.items[nextIndex]) {
-           $scope.scrollItems.push($scope.items[nextIndex]);
-         }
-         else {
-          break;
-         }
-       }
-
-       if(!$scope.$$phase){
-         $scope.$apply();
-       }
-     };
-
-     $scope.init = function() {
-       $scope.loadMore();
-     };
+      for(var i=0; i<100; i++) {
+        $scope.dataModel.push(i);
+      }
     }
 ]);
  ```
 
 # Options
-- `su-endless-scroll` *function* (required)
+- `su-endless-scroll` *Array* (required)
 
- This is the main attribute and takes the callback method from your controller as a value
+This is the main attribute and takes the model that contains all the data. This needs to be and Array.
+
+- `su-endless-scroll-output` *empty Array* (required)
+
+This model will provide the actual partial display, depending on the scroll position, of the items from the `dataModel`. Use this model as the source for your ng-repeat.
+
+- su-endless-scroll-items *integer* (default: `20`; optional)
+
+Set the amount of items to display at every load of items
+
 - `su-endless-scroll-offset` *integer* (default `30`; optional)
 
  The number off pixels offset from the bottom of your wrapper from which the callback method will be triggered.
+
 - `su-endless-scroll-auto-check` *boolean* (default `true`; optional)
 
- If the height of the initial content coincedentally is exactly the height of the container scrolling will not be possible, even if more content is available. Enableling this option will solve this within one second.
+ If the height of the initial content coincedentally is exactly the height of the container scrolling will not be possible, 
+even if more content is available. Enabling this option will solve this within one second. Don't set this to false unless you're sure you need to.

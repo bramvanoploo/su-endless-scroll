@@ -1,4 +1,4 @@
-/* su-endless-scroll - v1.0.0 - 2015-08-20 */
+/* su-endless-scroll - v1.1.0 - 2015-09-04 */
 var mod = angular.module('suEndlessScroll', []);
 
 mod.directive('suEndlessScroll', ['$window',
