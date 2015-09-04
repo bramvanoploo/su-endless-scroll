@@ -71,7 +71,7 @@ Alternatively you can `position:` the element `absolute` or `fixed`, width `top`
 # Options
 - `su-endless-scroll` *Array* (required)
 
- This is the main attribute and takes the model that contains all the data. This needs to be and Array.
+ This is the main attribute, takes the model that contains all the data and needs to be an Array.
 
 - `su-endless-scroll-output` *empty Array* (required)
 
