@@ -1,5 +1,4 @@
 /* su-endless-scroll - v1.0.0 - 2015-08-20 */
-
 var mod = angular.module('suEndlessScroll', []);
 
 mod.directive('suEndlessScroll', ['$window',
@@ -7,25 +6,25 @@ mod.directive('suEndlessScroll', ['$window',
   	return {
       restrict: 'A',
       scope: {
-        suEndlessScroll: '&',
-        suEndlessScrollOffset: '@offset',
-        suEndlessScrollAutoCheck: '@autoCheck'
+        suEndlessScroll: '=',
+        suEndlessScrollOutput: '=',
+        suEndlessScrollOffset: '=',
+        suEndlessScrollLimit: '=',
+        suEndlessScrollAutoCheck: '='
       },
       link: function(scope, element, attrs) {
         var elementHeight, currentScrollHeight, triggerPoint;
-        var _element = angular.element(element);
-        var _window = angular.element($window);
-        var currentScrollHeight = _element.scrollHeight;
+        var currentScrollHeight = angular.element(element).scrollHeight;
         var eventFired = false;
-        var defaultOffset = 30;
-        var offset = (!scope.offset)? defaultOffset : scope.offset;
+        var offset = (scope.suEndlessScrollOffset === undefined)? 30 : parseInt(scope.suEndlessScrollOffset);
         var autoCheckInterval = 1000;
-        var autoCheck = (!scope.autoCheck)? true : scope.autoCheck;
+        var autoCheck = (!scope.suEndlessScrollAutoCheck)? true : scope.suEndlessScrollAutoCheck;
+        var displayLimit = (scope.suEndlessScrollLimit === undefined || parseInt(scope.suEndlessScrollLimit) < 1)? 20 : parseInt(scope.suEndlessScrollLimit);
 
         function setHeightRelatedVariables() {
           elementHeight = element.outerHeight();
           triggerPoint = (parseInt(elementHeight) + parseInt(offset));
-          currentScrollHeight = _element.scrollHeight;
+          currentScrollHeight = angular.element(element).scrollHeight;
         }
         
         function testConditions(eventElement) {
@@ -37,16 +36,40 @@ mod.directive('suEndlessScroll', ['$window',
           }
 
           if(scrollPosition <= triggerPoint && !eventFired) {
-            scope.suEndlessScroll();
+            processData();
             eventFired = true;
+          }
+        }
+        
+        function processData(clear) {
+          if(clear) {
+            scope.suEndlessScrollOutput = [];
+            angular.element(element)[0].scrollTop = 0;
+          }
+
+          if(!scope.suEndlessScroll || !scope.suEndlessScroll[scope.suEndlessScrollOutput.length]) {
+            return;
+          }
+          
+          var _scrollItemsCount = scope.suEndlessScrollOutput.length;
+
+          for(var x = 0; x < displayLimit; x++) {
+            var nextIndex = ((_scrollItemsCount)+x);
+
+            if(scope.suEndlessScroll[nextIndex]) {
+              scope.suEndlessScrollOutput.push(scope.suEndlessScroll[nextIndex]);
+            }
+          }
+
+          if(!scope.$parent.$$phase){
+            scope.$parent.$digest();
           }
         }
         
         function initAutoCheck() {
           if(autoCheck) {
             setInterval(function() {
-              console.log();
-              testConditions(_element);
+              testConditions(angular.element(element));
             }, autoCheckInterval);
           }
         }
@@ -55,14 +78,20 @@ mod.directive('suEndlessScroll', ['$window',
           setHeightRelatedVariables();
           initAutoCheck();
 
-          _element.bind('scroll', function() {
+          angular.element(element).bind('scroll', function() {
             testConditions(this);
           });
           
-          _window.bind('resize', function() {
+          angular.element($window).bind('resize', function() {
             setHeightRelatedVariables();
-            testConditions(_element);
+            testConditions(angular.element(element));
           });
+          
+          scope.$watch('suEndlessScroll', function(newData, oldData) {
+            if(newData) {
+              processData(true);
+            }
+          }, true);
         }
         
         init();
