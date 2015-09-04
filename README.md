@@ -71,15 +71,15 @@ Alternatively you can `position:` the element `absolute` or `fixed`, width `top`
 # Options
 - `su-endless-scroll` *Array* (required)
 
-This is the main attribute and takes the model that contains all the data. This needs to be and Array.
+ This is the main attribute and takes the model that contains all the data. This needs to be and Array.
 
 - `su-endless-scroll-output` *empty Array* (required)
 
-This model will provide the actual partial display, depending on the scroll position, of the items from the `dataModel`. Use this model as the source for your ng-repeat.
+ This model will provide the actual partial display, depending on the scroll position, of the items from the `dataModel`. Use this model as the source for your ng-repeat.
 
 - su-endless-scroll-items *integer* (default: `20`; optional)
 
-Set the amount of items to display at every load of items
+ Set the amount of items to display at every load of items
 
 - `su-endless-scroll-offset` *integer* (default `30`; optional)
 
