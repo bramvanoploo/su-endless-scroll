@@ -38,7 +38,7 @@ That's why I've created my own version. No code from his project has been used, 
 
 - Add the directive to your HTML element:
  ```js
- <section ng-controller="YourController">
+ <section ng-controller="yourCtrl">
    <div class="wrapper" 
       su-endless-scroll="dataModel"
       su-endless-scroll-output="scrollModel"
@@ -68,7 +68,7 @@ That's why I've created my own version. No code from his project has been used, 
  
 - Create the two models in your controller. One containing the data and one to be used in you ng-repeat. The latter will automatically filled with the appropriate amount of entries by su-endless-scroll:
  ```js
- yourApp.controller('YourController', ['$scope', 
+ yourApp.controller('yourCtrl', ['$scope', 
     function($scope) {
       $scope.scrollModel = [];
       $scope.dataModel = [];
