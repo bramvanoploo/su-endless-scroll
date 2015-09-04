@@ -29,14 +29,16 @@ That's why I've created my own version. No code from his project has been used, 
  ```
 
 # Usage
-- Inject suEndlessScroll dependency into your AngularJs application:
+- App 
+ Inject suEndlessScroll dependency into your AngularJs application:
  ```js
  var yourApp = angular.module('yourApp', [
    'suEndlessScroll'
  ]);
  ```
 
-- Add the directive to your HTML element:
+- HTML 
+ Add the directive to your HTML element:
  ```js
  <section ng-controller="yourCtrl">
    <div class="wrapper" 
@@ -66,7 +68,8 @@ That's why I've created my own version. No code from his project has been used, 
 ```
 
  
-- Create the two models in your controller. One containing the data and one to be used in you ng-repeat. The latter will automatically filled with the appropriate amount of entries by su-endless-scroll:
+- Controller
+ Create the two models in your controller. One containing the data and one to be used in you ng-repeat. The latter will automatically filled with the appropriate amount of entries by su-endless-scroll:
  ```js
  yourApp.controller('yourCtrl', ['$scope', 
     function($scope) {
