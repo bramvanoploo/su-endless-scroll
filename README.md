@@ -30,14 +30,14 @@ That's why I've created my own version. No code from his project has been used, 
 
 # Usage
 - Inject suEndlessScroll dependency into your AngularJs application:
- ```
+ ```js
  var yourApp = angular.module('yourApp', [
    'suEndlessScroll'
  ]);
  ```
 
 - Add the directive to your HTML element:
- ```
+ ```js
  <section ng-controller="YourController">
    <div class="wrapper" 
       su-endless-scroll="dataModel"
@@ -51,11 +51,18 @@ That's why I've created my own version. No code from his project has been used, 
     </div>
  </section>
  ```
- The wrapper needs a css property `overflow: auto;` or `overflow-y: auto;` and a `height:` or `max-height:` needs to be specified. 
-Alternatively you can `position:` the element `absolute` or `fixed`, width `top` and `bottom` specified. Then a height or max-height specification is not required.
+
+- CSS
+```css
+.wrapper {
+  height: 350px;
+  overlow-y: auto;
+}
+```
+
  
 - Create the two models in your controller. One containing the data and one to be used in you ng-repeat. The latter will automatically filled with the appropriate amount of entries by su-endless-scroll:
- ```
+ ```js
  yourApp.controller('YourController', ['$scope', 
     function($scope) {
       $scope.scrollModel = [];
@@ -77,7 +84,7 @@ Alternatively you can `position:` the element `absolute` or `fixed`, width `top`
 
  This model will provide the actual partial display, depending on the scroll position, of the items from the `dataModel`. Use this model as the source for your ng-repeat.
 
-- su-endless-scroll-items *integer* (default: `20`; optional)
+- `su-endless-scroll-items` *integer* (default: `20`; optional)
 
  Set the amount of items to display at every load of items
 
