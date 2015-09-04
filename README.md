@@ -3,7 +3,7 @@
   * Initial release
 
 - 1.1.0
-  * Big improvement in usability. Not real functionality required in the controller anymore. Just two models. One filled and one empty.
+  * Big improvement in usability. No real functionality required in the controller anymore. Just two models. One filled and one empty.
 
 
 
