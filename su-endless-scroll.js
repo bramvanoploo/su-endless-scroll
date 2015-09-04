@@ -15,15 +15,18 @@ mod.directive('suEndlessScroll', ['$window',
       link: function(scope, element, attrs) {
         var elementHeight, currentScrollHeight, triggerPoint;
         var currentScrollHeight = angular.element(element).scrollHeight;
-        var eventFired = false;
-        var offset = (scope.suEndlessScrollOffset === undefined)? 30 : parseInt(scope.suEndlessScrollOffset);
+        var isDataAdded = false;
         var autoCheckInterval = 1000;
-        var autoCheck = (!scope.suEndlessScrollAutoCheck)? true : scope.suEndlessScrollAutoCheck;
-        var displayLimit = (scope.suEndlessScrollLimit === undefined || parseInt(scope.suEndlessScrollLimit) < 1)? 20 : parseInt(scope.suEndlessScrollLimit);
+        
+        scope.suEndlessScroll = (!scope.suEndlessScroll)? [] : scope.suEndlessScroll;
+        scope.suEndlessScrollOutput = (!scope.suEndlessScrollOutput)? [] : scope.suEndlessScrollOutput;
+        scope.suEndlessScrollOffset = (!scope.suEndlessScrollOffset)? 30 : scope.suEndlessScrollOffset;
+        scope.suEndlessScrollLimit = (!scope.suEndlessScrollLimit)? 20 : scope.suEndlessScrollLimit;
+        scope.suEndlessScrollAutoCheck = (scope.suEndlessScrollAutoCheck === undefined)? true : scope.suEndlessScrollAutoCheck;
 
         function setHeightRelatedVariables() {
           elementHeight = element.outerHeight();
-          triggerPoint = (parseInt(elementHeight) + parseInt(offset));
+          triggerPoint = (parseInt(elementHeight) + parseInt(scope.suEndlessScrollOffset));
           currentScrollHeight = angular.element(element).scrollHeight;
         }
         
@@ -32,19 +35,19 @@ mod.directive('suEndlessScroll', ['$window',
 
           if(currentScrollHeight !== eventElement.scrollHeight) {
             currentScrollHeight = eventElement.scrollHeight;
-            eventFired = false;
+            isDataAdded = false;
           }
 
-          if(scrollPosition <= triggerPoint && !eventFired) {
+          if(scrollPosition <= triggerPoint && !isDataAdded) {
             processData();
-            eventFired = true;
+            isDataAdded = true;
           }
         }
         
         function processData(clear) {
           if(clear) {
-            scope.suEndlessScrollOutput = [];
             angular.element(element)[0].scrollTop = 0;
+            scope.suEndlessScrollOutput = [];
           }
 
           if(!scope.suEndlessScroll || !scope.suEndlessScroll[scope.suEndlessScrollOutput.length]) {
@@ -53,7 +56,7 @@ mod.directive('suEndlessScroll', ['$window',
           
           var _scrollItemsCount = scope.suEndlessScrollOutput.length;
 
-          for(var x = 0; x < displayLimit; x++) {
+          for(var x = 0; x < scope.suEndlessScrollLimit; x++) {
             var nextIndex = ((_scrollItemsCount)+x);
 
             if(scope.suEndlessScroll[nextIndex]) {
@@ -67,7 +70,7 @@ mod.directive('suEndlessScroll', ['$window',
         }
         
         function initAutoCheck() {
-          if(autoCheck) {
+          if(scope.suEndlessScrollAutoCheck) {
             setInterval(function() {
               testConditions(angular.element(element));
             }, autoCheckInterval);
