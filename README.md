@@ -23,7 +23,7 @@ That's why I've created my own version. No code from his project has been used, 
  ```
 
 - Now add the script tag to your page. My module's only dependency is AngularJS itself (where ngInfiniteScroll also requires jQuery):
- ```
+ ```html
  <script type='text/javascript' src='path/to/angular.min.js'></script>
  <script type='text/javascript' src='path/to/su-endless-scroll.min.js'></script>
  ```
