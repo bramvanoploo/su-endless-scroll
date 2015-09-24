@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git://github.com/Bram77/su-endless-scroll.git"
   },
-  "browser": "su-endless-scroll.js",
+  "browser": "su-endless-scroll..min.js",
   "author": {
     "name": "Bram van Oploo",
     "email": "bram@sudo-systems.com",
