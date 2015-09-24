@@ -5,6 +5,9 @@
 - 1.1.0
   * Big improvement in usability. No real functionality required in the controller anymore. Just two models. One filled and one empty.
 
+- 1.2.0
+  * Removed requirement for output model. This is being added to the controller by the directive itself now; Added CSS for easier implementation; Fixed issues with scrollHeight detection.
+
 
 
 # angular-su-endless-scroll
@@ -24,8 +27,10 @@ That's why I've created my own version. No code from his project has been used, 
 
 - Now add the script tag to your page. My module's only dependency is AngularJS itself (where ngInfiniteScroll also requires jQuery):
  ```html
- <script type='text/javascript' src='path/to/angular.min.js'></script>
- <script type='text/javascript' src='path/to/su-endless-scroll.min.js'></script>
+ <link rel="css" href="path/to/su-endless-scroll.min.css" />
+
+ <script type="text/javascript" src="path/to/angular.min.js"></script>
+ <script type="text/javascript" src="path/to/su-endless-scroll.min.js"></script>
  ```
 
 # Usage
@@ -42,14 +47,12 @@ That's why I've created my own version. No code from his project has been used, 
 
  Add the directive to your HTML element:
  ```js
- <section ng-controller="yourCtrl">
-   <div class="wrapper" 
-      su-endless-scroll="dataModel"
-      su-endless-scroll-output="scrollModel"
-      su-endless-scroll-items="20"
-      su-endless-scroll-offset="30" 
+ <section class="listContainer" ng-controller="YourCtrl">
+   <div su-endless-scroll="yourDataModel"
+      su-endless-scroll-items="30"
+      su-endless-scroll-offset="50" 
       su-endless-scroll-auto-check="true">
-     <div ng-repeat="item in scrollModel track by $index">
+     <div ng-repeat="item in suEndlessScrollItems track by $index">
        {{$index}}: {{item}}
      </div>
     </div>
@@ -58,29 +61,22 @@ That's why I've created my own version. No code from his project has been used, 
 
 - CSS
 ```css
-.wrapper {
-  height: 350px;
-  overlow-y: auto;
-}
-
-.wrapper > div {
-  line-heigth: 24px;
-  border-bottom: 1px solid #AAA;
+section.listContainer {
+  position: relative;
+  height: 600px;
 }
 ```
 
  
 - Controller
 
- Create the two models in your controller. One containing the data and one to be used in you ng-repeat. The latter will automatically filled with the appropriate amount of entries by su-endless-scroll:
  ```js
- yourApp.controller('yourCtrl', ['$scope', 
+ yourApp.controller('YourCtrl', ['$scope', 
     function($scope) {
-      $scope.scrollModel = [];
-      $scope.dataModel = [];
+      $scope.yourDataModel = [];
 
       for(var i=0; i<100; i++) {
-        $scope.dataModel.push(i);
+        $scope.yourDataModel.push(i);
       }
     }
 ]);
@@ -91,15 +87,11 @@ That's why I've created my own version. No code from his project has been used, 
 
  This is the main attribute, takes the model that contains all the data and needs to be an Array.
 
-- `su-endless-scroll-output` *empty Array* (required)
-
- This model will provide the actual partial display, depending on the scroll position, of the items from the `dataModel`. Use this model as the source for your ng-repeat.
-
 - `su-endless-scroll-items` *integer* (default: `20`; optional)
 
  Set the amount of items to display at every load of items
 
-- `su-endless-scroll-offset` *integer* (default `30`; optional)
+- `su-endless-scroll-offset` *integer* (default `100`; optional)
 
  The number off pixels offset from the bottom of your wrapper from which the callback method will be triggered.
 

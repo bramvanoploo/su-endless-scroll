@@ -9,7 +9,10 @@
     }
   ],
   "description": "Endless scrolling for AngularJs",
-  "main": "su-endless-scroll.min.js",
+  "main": [
+    "su-endless-scroll.min.js",
+    "su-endless-scroll.min.css"
+  ],
   "keywords": [
     "angular",
     "angularjs",

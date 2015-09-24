@@ -1,43 +1,44 @@
-/* su-endless-scroll - v1.1.1 - 2015-09-05 */
+/* su-endless-scroll - v1.2.0 - 2015-09-24 */
 var mod = angular.module('suEndlessScroll', []);
 
-mod.directive('suEndlessScroll', ['$window',
-  function($window) {
+mod.directive('suEndlessScroll', ['$window', '$timeout',
+  function($window, $timeout) {
   	return {
       restrict: 'A',
       scope: {
         suEndlessScroll: '=',
-        suEndlessScrollOutput: '=',
         suEndlessScrollOffset: '=',
         suEndlessScrollLimit: '=',
         suEndlessScrollAutoCheck: '='
       },
       link: function(scope, element, attrs) {
         var elementHeight, currentScrollHeight, triggerPoint;
-        var currentScrollHeight = angular.element(element).scrollHeight;
+        var _element = angular.element(element);
+        var currentScrollHeight = _element[0].scrollHeight;
         var isDataAdded = false;
         var autoCheckInterval = 1000;
-        
+        scope.$parent.suEndlessScrollItems = [];
+
         scope.suEndlessScroll = (!scope.suEndlessScroll)? [] : scope.suEndlessScroll;
-        scope.suEndlessScrollOutput = (!scope.suEndlessScrollOutput)? [] : scope.suEndlessScrollOutput;
-        scope.suEndlessScrollOffset = (!scope.suEndlessScrollOffset)? 30 : scope.suEndlessScrollOffset;
+        scope.suEndlessScrollOffset = (!scope.suEndlessScrollOffset)? 100 : scope.suEndlessScrollOffset;
         scope.suEndlessScrollLimit = (!scope.suEndlessScrollLimit)? 20 : scope.suEndlessScrollLimit;
         scope.suEndlessScrollAutoCheck = (scope.suEndlessScrollAutoCheck === undefined)? true : scope.suEndlessScrollAutoCheck;
 
         function setHeightRelatedVariables() {
-          elementHeight = element.outerHeight();
-          triggerPoint = (parseInt(elementHeight) + parseInt(scope.suEndlessScrollOffset));
-          currentScrollHeight = angular.element(element).scrollHeight;
+          elementHeight = _element[0].clientHeight;
+          currentScrollHeight = _element[0].scrollHeight;
+          triggerPoint = (elementHeight + parseInt(scope.suEndlessScrollOffset));
         }
         
         function testConditions(eventElement) {
-          var scrollPosition = (eventElement.scrollHeight - eventElement.scrollTop);
+          setHeightRelatedVariables();
+          var scrollPosition = (_element[0].scrollHeight - _element[0].scrollTop);
 
           if(currentScrollHeight !== eventElement.scrollHeight) {
             currentScrollHeight = eventElement.scrollHeight;
             isDataAdded = false;
           }
-
+          
           if(scrollPosition <= triggerPoint && !isDataAdded) {
             processData();
             isDataAdded = true;
@@ -46,21 +47,21 @@ mod.directive('suEndlessScroll', ['$window',
         
         function processData(clear) {
           if(clear) {
-            angular.element(element)[0].scrollTop = 0;
-            scope.suEndlessScrollOutput = [];
+            _element[0].scrollTop = 0;
+            scope.$parent.suEndlessScrollItems = [];
           }
 
-          if(!scope.suEndlessScroll || !scope.suEndlessScroll[scope.suEndlessScrollOutput.length]) {
+          if(!scope.suEndlessScroll || !scope.suEndlessScroll[scope.$parent.suEndlessScrollItems.length]) {
             return;
           }
           
-          var _scrollItemsCount = scope.suEndlessScrollOutput.length;
+          var _scrollItemsCount = scope.$parent.suEndlessScrollItems.length;
 
           for(var x = 0; x < scope.suEndlessScrollLimit; x++) {
             var nextIndex = ((_scrollItemsCount)+x);
 
             if(scope.suEndlessScroll[nextIndex]) {
-              scope.suEndlessScrollOutput.push(scope.suEndlessScroll[nextIndex]);
+              scope.$parent.suEndlessScrollItems.push(scope.suEndlessScroll[nextIndex]);
             }
           }
 
@@ -70,24 +71,24 @@ mod.directive('suEndlessScroll', ['$window',
         }
         
         function initAutoCheck() {
+          testConditions(_element);
+          
           if(scope.suEndlessScrollAutoCheck) {
             setInterval(function() {
-              testConditions(angular.element(element));
+              testConditions(_element);
             }, autoCheckInterval);
           }
         }
        
         function init() {
-          setHeightRelatedVariables();
           initAutoCheck();
 
-          angular.element(element).bind('scroll', function() {
+          _element.bind('scroll', function() {
             testConditions(this);
           });
           
           angular.element($window).bind('resize', function() {
-            setHeightRelatedVariables();
-            testConditions(angular.element(element));
+            testConditions(_element);
           });
           
           scope.$watch('suEndlessScroll', function(newData, oldData) {
@@ -97,7 +98,7 @@ mod.directive('suEndlessScroll', ['$window',
           }, true);
         }
         
-        init();
+        $timeout(init);
       }
   	};
   }
