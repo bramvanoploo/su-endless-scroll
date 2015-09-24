@@ -5,7 +5,7 @@
 - 1.1.0
   * Big improvement in usability. No real functionality required in the controller anymore. Just two models. One filled and one empty.
 
-- 1.2.0
+- 1.3.1
   * Removed requirement for output model. This is being added to the controller by the directive itself now; Added CSS for easier implementation; Fixed issues with scrollHeight detection.
 
 
